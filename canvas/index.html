@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一章Hello World</title>
+</head>
+
+<body>
+    <canvas id="canvasOne" width="500" height="300">
+        Your browser does not support HTML5 Canvas.
+    </canvas>
+    <script>
+        var theCanvas = document.getElementById("canvasOne");
+        if (!theCanvas || !theCanvas.getContext) {
+            return;
+        }
+
+        function canvasSupport() {
+            return !!document.createElement('canvas').getContext;
+        }
+
+        function canvasApp() {
+            if (!canvasSupport) {
+                return;
+            }
+        }
+        var context = theCanvas.getContext("2d");
+    </script>
+</body>
+
+</html>
