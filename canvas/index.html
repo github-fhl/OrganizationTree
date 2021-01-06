@@ -8,25 +8,87 @@
 </head>
 
 <body>
-    <canvas id="canvasOne" width="500" height="300">
-        Your browser does not support HTML5 Canvas.
-    </canvas>
+    <div style="position: absolute; top: 50px; left: 50px;">
+        <canvas id="canvasOne" width="500" height="300">
+            Your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
     <script>
-        var theCanvas = document.getElementById("canvasOne");
-        if (!theCanvas || !theCanvas.getContext) {
-            return;
-        }
+        //var theCanvas = document.getElementById("canvasOne");
+        // if (!theCanvas || !theCanvas.getContext) {
+        //     return;
+        // }
 
-        function canvasSupport() {
-            return !!document.createElement('canvas').getContext;
-        }
+        // function canvasSupport() {
+        //     return !!document.createElement('canvas').getContext;
+        // }
 
-        function canvasApp() {
-            if (!canvasSupport) {
+        // function canvasApp() {
+        //     if (!canvasSupport) {
+        //         return;
+        //     }
+        // }
+        // var context = theCanvas.getContext("2d");
+        // context.fillStyle = "#ffffaa";
+        // context.fillRect(0, 0, 500, 300);
+        // context.font = "20px";
+        // context.textBaseline = "top";
+        // context.fillText ("Hello World!", 195, 80);
+        // context.fillStyle = "#000000";
+        // var helloWorldImage = new Image(); 
+        // helloWorldImage.onload = function () { 
+        //     context.drawImage(helloWorldImage, 160, 130); 
+        // }
+        // helloWorldImage.src = "logo.png";
+        // context.strokeStyle = "#000000";
+        // context.strokeRect(5, 5, 490, 290);
+
+        window.addEventListener("load", eventWindowLoaded, false);
+        var Debugger = function () {};
+        Debugger.log = function (message) {
+            try {
+                console.log(message);
+            } catch (exception) {
                 return;
             }
         }
-        var context = theCanvas.getContext("2d");
+
+        function eventWindowLoaded() {
+            canvasApp();
+        }
+
+        function canvasSupport() {
+            return Modernizr.canvas;
+        }
+
+        function canvasApp() {
+            // if (!canvasSupport()) {
+            //     return;
+            // }
+            var theCanvas = document.getElementById("canvasOne");
+            var context = theCanvas.getContext("2d");
+            Debugger.log("Drawing Canvas");
+
+            function drawScreen() {
+                //背景
+                context.fillStyle = "#ffffaa";
+                context.fillRect(0, 0, 500, 300);
+                //文字
+                context.fillStyle = "#000000";
+                context.font = "20px Sans-Serif";
+                context.textBaseline = "top";
+                context.fillText("Hello World!", 195, 80); //图像
+                var helloWorldImage = new Image();
+                helloWorldImage.onload = function () {
+                    context.drawImage(helloWorldImage, 62.5, 0);
+                }
+                helloWorldImage.src = "logo.png";
+                //边框
+                context.strokeStyle = "#000000";
+                context.strokeRect(1, 1, 498, 298);
+            }
+            drawScreen();
+        }
     </script>
 </body>
 
